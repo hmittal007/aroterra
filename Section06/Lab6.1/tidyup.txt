@@ -1,0 +1,12 @@
+removing aro cluster with its service prinicipal account
+
+clusterResourceGroup=aro-rg
+clusterName=aro01
+
+#get service prinicipal id
+clientid=$(az aro show -g $clusterResourceGroup -n $clusterName --query "servicePrincipalProfile.clientId" -o tsv)
+
+az aro delete -n $clusterName -g $clusterResourceGroup --yes
+
+# once you get the id, you can remove the spa after deleting an aro cluster
+az ad sp delete --id $clientid

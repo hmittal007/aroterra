@@ -1,0 +1,41 @@
+# Microsoft link to enable monitoring
+https://docs.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-azure-redhat4-setup
+
+# Download the enable-monitor script from microsoft site.
+curl -o enable-monitoring.sh -L https://aka.ms/enable-monitoring-bash-script
+
+Let us create a log analytics workspace
+
+#install oc cli on azure cloud shell if using azure cloud shell for this lab.
+cd ~
+wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz
+mkdir openshift
+tar -zxvf openshift-client-linux.tar.gz -C openshift
+echo 'export PATH=$PATH:~/openshift' >> ~/.bashrc && source ~/.bashrc
+
+#install helm on wsl on windows workstation if using windows workstation
+curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+sudo apt-get install apt-transport-https --yes
+echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+
+#Export the environment variables.
+export aroclusResrcId='/subscriptions/3553dba1-3448-439a-870e-a6b9f3db5ef0/resourceGroups/aro-rg/providers/Microsoft.RedHatOpenShift/OpenShiftClusters/aro01'
+export lawsResurcId='/subscriptions/3553dba1-3448-439a-870e-a6b9f3db5ef0/resourceGroups/aro-rg/providers/Microsoft.OperationalInsights/workspaces/lao01'
+
+
+
+LOG IN TO ARO VIA OC CLI
+
+# get ARO login credentials.
+az aro list-credentials --name aro01 --resource-group aro-rg
+
+# log on to ARO using OC cli
+oc login -u kubeadmin -p QdyqT-d3kIN-kNtYE-IE2Xt https://api.addnsaro.westeurope.aroapp.io:6443/
+
+# save the context to a variable.
+kContext=$(oc config current-context)
+
+#apply enable-monitoring script on your aro cluster to enable monitoring.
+bash enable-monitoring.sh --resource-id $aroclusResrcId --kube-context $kContext --workspace-id $lawsResurcId

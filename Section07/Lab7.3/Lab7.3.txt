@@ -1,0 +1,67 @@
+LOG IN TO ARO VIA OC CLI
+oc login -u kubeadmin -p PRKKX-mHAD7-zZKG8-aGJCM https://api.addnsaro.westeurope.aroapp.io:6443/
+
+GETTING OAUTH CALLBACK URL
+$ oauthCallBack=`oc get route oauth-openshift -n openshift-authentication -o jsonpath='{.spec.host}'`
+$ oauthCallBackURL=https://$oauthCallBack/oauth2callback/AAD
+$ echo $oauthCallBackURL
+
+#example of Oath callback url.
+https://oauth-openshift.apps.addnsaro.westeurope.aroapp.io/oauth2callback/AAD
+
+
+Part 01
+configuration on Azure AD.
+
+ADD API PERMISSION TO THE SERVICE PRINCIPAL
+Log in to Azure Portal
+Go to Azure Active Directory
+Click App registrations
+Click "All applications"
+Search for "aro-aad"
+Click "View API permission"
+Click "Add a permission"
+Click "Azure Active Directory Graph"
+Click "Delegated Permissions"
+Check "User.Read"
+Click the "Add permission" button at the bottom.
+Click "Grant admin consent ..."
+
+https://oauth-openshift.apps.addnsaro.westeurope.aroapp.io/oauth2callback/AAD
+
+# Example of service principal account details
+clientid=3acda382-95f1-4c24-ae49-54529ab77e9e
+password=nR1QOTz_5wL.VNnaB~e1VTqhnouBT64_HP
+
+NOTE:
+AAD is the name of the identity provider when configuring OAuth on OpenShift
+
+#ADD THE OAUTH CALLBACK URL TO THE SAME SERVICE PRINCIPAL
+Go to Azure Active Directory
+Click App registration
+Click on "all-in-one-sp" under all applications
+Under Overview, click right top corner link for "Add a Redirect URI"
+Click "Add a platform"
+Click Web Application from the list of Configure platforms
+Enter the value of the $oauthCallBackURL from the previous step to the "Redirect URIs"
+Click configure
+
+#CREATE A MANIFEST FILE: it is already create in the same folder.
+
+#UPDATE SERVICE PRINCIPAL WITH THE MANIFEST:
+az ad app update \
+--set optionalClaims.idToken=@manifest.json \
+--id 3acda382-95f1-4c24-ae49-54529ab77e9e
+
+Part02
+Now configuring our ARO Cluster
+
+#CREATE A SECRET TO STORE SERVICE PRINCIPAL'S PASSWORD:
+oc create secret generic openid-client-secret-azuread \
+--namespace openshift-config \
+--from-literal=clientSecret='nR1QOTz_5wL.VNnaB~e1VTqhnouBT64_HP'
+
+#CREATE AN OAUTH CONFIGURATION by updating the openid.yaml
+
+#UPDATE OPENSHIFT OAUTH CONFIGURATION
+oc apply -f openid.yaml

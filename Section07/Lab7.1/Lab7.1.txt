@@ -1,0 +1,10 @@
+ADDING TWO A RECORDS FOR API AND *.APPS IN THE DNS ZONE
+
+Log in to Azure Portal
+1. Go to DNS zone
+2. Click onto the domain for the ARO cluster
+3. Click "+ Record Set" on the top menu to create an A record and add values to Name and IP. 
+
+You will need to repeat step 3 for both api and *.apps A records.
+  Name: api or *.apps
+  IP: the apps/ingress IP is from the output of the creation of the ARO cluster.

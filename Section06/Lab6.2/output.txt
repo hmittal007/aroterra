@@ -1,0 +1,65 @@
+null_resource.aro02[0] (local-exec): {
+null_resource.aro02[0] (local-exec):   "apiserverProfile": {
+null_resource.aro02[0] (local-exec):     "ip": "52.149.72.81",
+null_resource.aro02[0] (local-exec):     "url": "https://api.addnsaro.westeurope.aroapp.io:6443/",
+null_resource.aro02[0] (local-exec):     "visibility": "Public"
+null_resource.aro02[0] (local-exec):   },
+null_resource.aro02[0] (local-exec):   "clusterProfile": {
+null_resource.aro02[0] (local-exec):     "domain": "addnsaro.westeurope.aroapp.io",
+null_resource.aro02[0] (local-exec):     "pullSecret": null,
+null_resource.aro02[0] (local-exec):     "resourceGroupId": "/subscriptions/fb3bc7d0-ee5c-49c9-8e79-c16f06cd44dd/resourcegroups/aro-dck0w85r",
+null_resource.aro02[0] (local-exec):     "version": "4.6.21"
+null_resource.aro02[0] (local-exec):   },
+null_resource.aro02[0] (local-exec):   "consoleProfile": {
+null_resource.aro02[0] (local-exec):     "url": "https://console-openshift-console.apps.addnsaro.westeurope.aroapp.io/"        
+null_resource.aro02[0] (local-exec):   },
+null_resource.aro02[0] (local-exec):   "id": "/subscriptions/fb3bc7d0-ee5c-49c9-8e79-c16f06cd44dd/resourceGroups/aro-rg/providers/Microsoft.RedHatOpenShift/openShiftClusters/aro01",
+null_resource.aro02[0] (local-exec):   "ingressProfiles": [
+null_resource.aro02[0] (local-exec):     {
+null_resource.aro02[0] (local-exec):       "ip": "104.45.78.19",
+null_resource.aro02[0] (local-exec):       "name": "default",
+null_resource.aro02[0] (local-exec):       "visibility": "Public"
+null_resource.aro02[0] (local-exec):     }
+null_resource.aro02[0] (local-exec):   ],
+null_resource.aro02[0] (local-exec):   "location": "westeurope",
+null_resource.aro02[0] (local-exec):   "masterProfile": {
+null_resource.aro02[0] (local-exec):     "subnetId": "/subscriptions/fb3bc7d0-ee5c-49c9-8e79-c16f06cd44dd/resourceGroups/aro-rg/providers/Microsoft.Network/virtualNetworks/aro-vnet/subnets/master-sub",
+null_resource.aro02[0] (local-exec):     "vmSize": "Standard_D8s_v3"
+null_resource.aro02[0] (local-exec):   },
+null_resource.aro02[0] (local-exec):   "name": "aro01",
+null_resource.aro02[0] (local-exec):   "networkProfile": {
+null_resource.aro02[0] (local-exec):     "podCidr": "10.128.0.0/14",
+null_resource.aro02[0] (local-exec):     "serviceCidr": "172.30.0.0/16"
+null_resource.aro02[0] (local-exec):   },
+null_resource.aro02[0] (local-exec):   "provisioningState": "Succeeded",
+null_resource.aro02[0] (local-exec):   "resourceGroup": "aro-rg",
+null_resource.aro02[0] (local-exec):   "servicePrincipalProfile": {
+null_resource.aro02[0] (local-exec):     "clientId": "82628cf2-5df0-43e4-a929-93322f16341a",
+null_resource.aro02[0] (local-exec):     "clientSecret": null
+null_resource.aro02[0] (local-exec):   },
+null_resource.aro02[0] (local-exec):   "tags": null,
+null_resource.aro02[0] (local-exec):   "type": "Microsoft.RedHatOpenShift/openShiftClusters",
+null_resource.aro02[0] (local-exec):   "workerProfiles": [
+null_resource.aro02[0] (local-exec):     {
+null_resource.aro02[0] (local-exec):       "count": 1,
+null_resource.aro02[0] (local-exec):       "diskSizeGb": 128,
+null_resource.aro02[0] (local-exec):       "name": "aro01-22hlw-worker-westeurope1",
+null_resource.aro02[0] (local-exec):       "subnetId": "/subscriptions/fb3bc7d0-ee5c-49c9-8e79-c16f06cd44dd/resourceGroups/aro-rg/providers/Microsoft.Network/virtualNetworks/aro-vnet/subnets/worker-sub",
+null_resource.aro02[0] (local-exec):       "vmSize": "Standard_D4s_v3"
+null_resource.aro02[0] (local-exec):     },
+null_resource.aro02[0] (local-exec):     {
+null_resource.aro02[0] (local-exec):       "count": 1,
+null_resource.aro02[0] (local-exec):       "diskSizeGb": 128,
+null_resource.aro02[0] (local-exec):       "name": "aro01-22hlw-worker-westeurope2",
+null_resource.aro02[0] (local-exec):       "subnetId": "/subscriptions/fb3bc7d0-ee5c-49c9-8e79-c16f06cd44dd/resourceGroups/aro-rg/providers/Microsoft.Network/virtualNetworks/aro-vnet/subnets/worker-sub",
+null_resource.aro02[0] (local-exec):       "vmSize": "Standard_D4s_v3"
+null_resource.aro02[0] (local-exec):     },
+null_resource.aro02[0] (local-exec):     {
+null_resource.aro02[0] (local-exec):       "count": 1,
+null_resource.aro02[0] (local-exec):       "diskSizeGb": 128,
+null_resource.aro02[0] (local-exec):       "name": "aro01-22hlw-worker-westeurope3",
+null_resource.aro02[0] (local-exec):       "subnetId": "/subscriptions/fb3bc7d0-ee5c-49c9-8e79-c16f06cd44dd/resourceGroups/aro-rg/providers/Microsoft.Network/virtualNetworks/aro-vnet/subnets/worker-sub",
+null_resource.aro02[0] (local-exec):       "vmSize": "Standard_D4s_v3"
+null_resource.aro02[0] (local-exec):     }
+null_resource.aro02[0] (local-exec):   ]
+null_resource.aro02[0] (local-exec): }
